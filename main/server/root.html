@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Real Tracker</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+<body>
+
+	<div class="topnav" style="color:orange" align="left">
+        <h2>Real Tracker Configurator</h2>
+		<p id="connectionStatusLabel"></p>
+		<p id="counterLabel"></p>		<!-- Debug label for testing purposes -->
+    </div>
+		
+	<button class="tablink" onclick="openPage('pageRuntime', this, 'orange')">Runtime</button>
+	<button class="tablink" onclick="openPage('pageSetup', this, 'orange')"id="defaultOpen">Setup</button>
+	<button class="tablink" onclick="openPage('pageTelemetry', this, 'orange')">Telemetry</button>
+	
+	
+	<!--***********************************************************************
+	*                             Runtime page                                *
+	************************************************************************-->
+	
+	<div id="pageRuntime" class="tabcontent">
+		<p>Display runtime data and statistics</p>
+	  
+		<div>
+			<!-- Text input with button -->
+			Send text: <input type="text" id="textEdit1">
+			<input type="button" value="Send" id="button1" onclick="onButtonClicked(this)"></button>
+		</div>
+	</div>
+
+    <!--***********************************************************************
+	*                              Setup page                                 *
+	************************************************************************-->
+	
+	<div id="pageSetup" class="tabcontent" align="left">
+		<fieldset>
+			<legend>Pan control</legend>
+			<p>
+				State: <input type="text" id="panState">
+			</p>
+			<p>
+				Heading (deg): <input type="text" id="panHeading">
+			</p>
+			<p> 
+				Offset (deg): <input type="text" id="panOffset"> <input type="button" value="Set" id="panOffsetSetBtn" onclick="onPanOffsetSetBtnClicked(this)"></button>
+			</p>
+			<p> 
+				<input type="checkbox" id="panManualSwitch" class="toggle-button" onclick="onPanManualModeChanged(this)">
+				<label for="panManualSwitch" class="text">Manual mode</label>
+			</p>
+			<p> 
+				Manual heading: <input type="text" id="panManualHeading"> <input type="button" value="Set" id="panManualHeadingSetBtn" onclick="onPanManualHeadingSetBtn(this)"></button> 
+			</p>
+			<p>
+				<input type="range" min="0" max="360" value="0" class="slider" id="panManualSlider" onchange="onPanManualSliderChanged(this)">
+			</p>
+			
+			<hr>
+			
+			<p>
+				Pan servo (calibrate magnetometer first):
+			</p>
+			<p> 
+				<input type="checkbox" id="switch1" class="toggle-button">
+				<label for="switch1" class="text">Inverted</label>
+			</p>
+			<p> 
+				Pan start move low [us]: <input type="text" id="textEdit1" > <!--style="float:right"--> <input type="button" value="Set" id="button1" onclick="onButtonClicked(this)"></button> 
+			</p>
+			<p>
+				Pan start move high [us]: <input type="text" id="textEdit1" > <input type="button" value="Set" id="button1" onclick="onButtonClicked(this)"></button> 
+			</p>
+			<p>
+				<input type="button" value="Calibrate" id="button2" onclick="onButtonClicked(this)"></button>
+			</p>
+		</fieldset>
+		<br>
+		<fieldset>
+			<legend>Tilt control</legend>
+			<p>
+				Tilt (deg): <input type="text" id="textEdit1">
+			</p>
+			<p> 
+				Offset (deg): <input type="text" id="textEdit1"> <input type="button" value="Set" id="button1" onclick="onButtonClicked(this)"></button>
+			</p>
+			<p> 
+				Max tilt [deg]: <input type="text" id="textEdit1" > <input type="button" value="Set" id="button1" onclick="onButtonClicked(this)"></button> 
+			</p>
+			<p>
+				Min tilt [deg]: <input type="text" id="textEdit1" > <input type="button" value="Set" id="button1" onclick="onButtonClicked(this)"></button> 
+			</p>
+			<p> 
+				<input type="checkbox" id="switch1" class="toggle-button">
+				<label for="switch1" class="text">Manual mode</label>
+			</p>
+			<p> 
+				Manual tilt: <input type="text" id="textEdit1"> <input type="button" value="Set" id="button1" onclick="onButtonClicked(this)"></button> 
+			</p>
+			<p>
+				<input type="range" min="-90" max="90" value="0" class="slider" id="slider2" onchange="onSliderChanged(this)">
+			</p>
+			
+			<hr>
+			
+			<p>
+				Tilt servo:
+			</p>
+			<p> 
+				<input type="checkbox" id="switch2" class="toggle-button">
+				<label for="switch2" class="text">Inverted</label>
+			</p>
+			<p> 
+				Max tilt servo [us]: <input type="text" id="textEdit1" > <input type="button" value="Set" id="button1" onclick="onButtonClicked(this)"></button> 
+			</p>
+			<p>
+				Min tilt servo [us]: <input type="text" id="textEdit1" > <input type="button" value="Set" id="button1" onclick="onButtonClicked(this)"></button> 
+			</p>
+		</fieldset>
+		
+		<br>
+		
+		<fieldset>
+			<legend>Magnetometer</legend>
+			<div>Zero X: <input type="text" id="textEdit1" style="float:right"> </div>
+			<br>
+			<div>Zero Y: <input type="text" id="textEdit1" style="float:right"> </div>
+			<br>
+			<div>Zero Z: <input type="text" id="textEdit1" style="float:right"> </div>
+			<br>
+			<div>Mag X: <input type="text" id="textEdit1" style="float:right"> </div>
+			<br>
+			<div>Mag Y: <input type="text" id="textEdit1" style="float:right"> </div>
+			<br>
+			<div>Mag Z: <input type="text" id="textEdit1" style="float:right"> </div>
+			<br>
+			<div>Heading : <input type="text" id="textEdit1" style="float:right"> </div>
+			<br>
+			<input type="button" value="Calibrate" id="button2" onclick="onButtonClicked(this)"></button>
+			<br>
+		</fieldset>
+		<br>
+		
+		
+
+	</div>
+
+    <!--***********************************************************************
+	*                            Telemetry page                               *
+	************************************************************************-->
+	
+	<div id="pageTelemetry" class="tabcontent">
+	  <h3>Telemetry</h3>
+	  <p>Get in Telemetry</p>
+	</div>
+
+
+	
+
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
